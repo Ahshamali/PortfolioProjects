@@ -68,6 +68,58 @@ SELECT Make, COUNT(Deal.VehicleID) FROM Deal
 JOIN Vehicle ON Deal.VehicleID = Vehicle.VehicleID
 GROUP BY Make
 
+    #Find the last name of all agents, and where they work, with a salary higher than 55000
+SELECT ALastName,DealershipName FROM Sales_agent 
+JOIN Dealership ON Sales_agent.DealershipID = Dealership.DealershipID 
+WHERE salary > 55000;
+
+#Find all the deals that included Liability insurance
+SELECT DealID FROM Deal  JOIN Insaurance ON Deal.InsauranceID = Insaurance.InsauranceID
+WHERE PolicyType ='Liability Insurance';
+
+#Calculate the cumulative sales for each sales agent over time.
+SELECT d.AgentID, d.DealDate, SUM(v.price) 
+OVER (PARTITION BY AgentID ORDER BY DealDate) AS Cumulative_sum FROM Deal d 
+JOIN Vehicle v ON d.VehicleID = v.VehicleID
+
+#Find the average price of vehicles, considering the previous and next rows in the result set.
+SELECT VehicleID, price ,AVG(price) 
+OVER (Order BY VehicleID ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS Avgpricewithrows 
+FROM Vehicle
+
+#Rank the sales agents based on the total sales amount.
+SELECT d.AgentID, SUM(price) AS Total_Sales, 
+RANK() OVER (ORDER BY SUM(price) DESC) AS Sales_Rank FROM Deal d 
+JOIN Vehicle v ON d.VehicleID = v.VehicleID
+GROUP BY d.AgentID
+
+#Change the renewal date From Insaurance table to different dates for each row
+UPDATE Insaurance
+SET RenewalDate = 
+	CASE
+		WHEN InsauranceID = 1 THEN  '2022-12-05'
+        WHEN InsauranceID = 2 THEN  '2022-12-13'
+        WHEN InsauranceID = 3 THEN  '2022-12-18'
+        WHEN InsauranceID = 4 THEN  '2022-11-25'
+        WHEN InsauranceID = 5 THEN  '2022-12-10'
+        WHEN InsauranceID = 6 THEN  '2022-12-01'
+        WHEN InsauranceID = 7 THEN '2023-12-12'
+        WHEN InsauranceID = 8 THEN  '2023-12-14'
+        WHEN InsauranceID = 9 THEN  '2023-12-10'
+        WHEN InsauranceID = 10 THEN '2023-12-17'
+        WHEN InsauranceID = 11 THEN  '2023-12-15'
+        WHEN InsauranceID = 12 THEN  '2023-12-13'
+        WHEN InsauranceID = 13 THEN  '2023-12-18'
+        WHEN InsauranceID = 14 THEN   '2023-11-25'
+        WHEN InsauranceID = 15 THEN   '2023-12-10'
+        WHEN InsauranceID = 16 THEN   '2023-12-01'
+        
+        ELSE RenewalDate = "2024-01-01"
+	END;
+        
+   #Calculate the running total of insurance renewals over time. 
+SELECT RenewalDate, COUNT(*) OVER(ORDER BY RenewalDate) FROM Insaurance
+
 
 
     
