@@ -1,4 +1,4 @@
-# PortfolioProjects
+# SQL-Projects
 # Scooty Dealership Project
 
 Welcome to the Scooty Dealership Project! This project is about scooty dealers and the companies that make them all over india, where we keep track of all scooties, customers and deals 
