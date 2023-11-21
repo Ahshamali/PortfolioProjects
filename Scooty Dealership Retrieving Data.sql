@@ -114,7 +114,7 @@ SET RenewalDate =
         WHEN InsauranceID = 15 THEN   '2023-12-10'
         WHEN InsauranceID = 16 THEN   '2023-12-01'
         
-        ELSE RenewalDate = "2024-01-01"
+        ELSE  "2024-01-01"
 	END;
         
    #Calculate the running total of insurance renewals over time. 
