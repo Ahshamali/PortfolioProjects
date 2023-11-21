@@ -3,6 +3,10 @@
 
 Welcome to the Scooty Dealership Project! This project is about scooty dealers and the companies that make them all over india, where we keep track of all scooties, customers and deals 
 
+## Skills used
+Joins, subquery, DQL, DDL, DML, GroupBY, WHERE, Aggregate Functions
+
+
 ## Features
 Sales Agent:
 Keeps information about the people who sell Scooties (sales agents).
@@ -38,7 +42,9 @@ Keeps information about the location of every dealership all over the country
 Used MySQL Database for this project
 
 Craeted Tables and inserted data inot them 
+
 Retrieved the important information using sql queries 
+
 Made a database Model of tables with Primary keys and Foreign Keys
 
 
